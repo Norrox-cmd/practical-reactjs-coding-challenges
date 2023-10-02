@@ -1,14 +1,27 @@
+import { useEffect, useState } from 'react';
 import './index.scss'
 
-const BottomResultBox = () => {
+const BottomResultBox = (props : {readTime: number, longestWord: string}) => {
+
+  const [readTime, setReadTime] = useState(0);
+  const [longestWord, setLongestWord] = useState('-');
+
+  useEffect(() => {
+    setLongestWord(props.longestWord);
+  }, [props.longestWord])
+
+  useEffect(() => {
+    setReadTime(props.readTime);
+  },[props.readTime]);
+
   const bottomResultBar = [
     {
       title: 'Average Reading Time:',
-      value: '-',
+      value: readTime === 0 ? '-' : `~${readTime} minute`,
     },
     {
       title: 'Longest word:',
-      value: '-',
+      value: longestWord,
     },
   ]
 
